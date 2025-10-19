@@ -1,0 +1,18 @@
+meta {
+  name: category create
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://to_do_back.test/api/categories
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "name":"Algo Nuevo",
+    "type":"philosofia"
+  }
+}

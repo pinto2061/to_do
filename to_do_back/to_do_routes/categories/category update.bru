@@ -1,0 +1,18 @@
+meta {
+  name: category update
+  type: http
+  seq: 4
+}
+
+put {
+  url: http://to_do_back.test/api/categories/16
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "name":"prueba 1",
+    "type":"algo"
+  }
+}

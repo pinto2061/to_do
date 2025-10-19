@@ -1,6 +1,6 @@
 {
   "version": "1",
-  "name": "to_do",
+  "name": "to_do_routes",
   "type": "collection",
   "ignore": [
     "node_modules",
