@@ -1,0 +1,22 @@
+meta {
+  name: register task
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://to_do_back.test/api/tasks
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "name": "Correr",
+    "description": "Tengo que salir a correr",
+    "finish_date": "2025-11-15",
+    "status": 0,
+    "user_id": 1,
+    "category_id": 1
+  }
+}

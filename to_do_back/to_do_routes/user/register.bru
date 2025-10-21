@@ -1,0 +1,22 @@
+meta {
+  name: register
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://to_do_back.test/api/register
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "first_name":"Luis",
+    "last_name":"Prueba",
+    "user_name":"testx2",
+    "email":"2_asotiation@gmail.com",
+    "password":"12341234",
+    "password_confirmation":"12341234"
+  }
+}

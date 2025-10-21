@@ -11,7 +11,8 @@ class StoreTaskRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        //return false;
+        return true;
     }
 
     /**
@@ -22,7 +23,11 @@ class StoreTaskRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string|max:255',
+            'description' => 'required|string', // No es necesario max:255 si tu campo es TEXT
+            'finish_date' => 'required|date', // 'date' es una regla mejor que 'string'
+            'user_id' => 'required|exists:users,id', // 'exists' asegura que el user_id existe en la tabla users
+            'category_id' => 'required|exists:categories,id', // 'exists' asegura que el category_id existe
         ];
     }
 }

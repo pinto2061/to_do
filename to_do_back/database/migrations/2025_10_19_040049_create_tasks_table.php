@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('description');
             $table->date('finish_date');
-            $table->boolean('status');
+            $table->boolean('status')->default(false);
             $table->foreignId('user_id')
                     ->nullable()
                     ->constrained('users')
