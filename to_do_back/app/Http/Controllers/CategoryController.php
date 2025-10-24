@@ -20,19 +20,16 @@ class CategoryController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function store(Request $request)
+    public function store(StoreCategoryRequest $request)
     {
         // Es una excelente práctica validar los datos antes de guardarlos
-        $validatedData = $request->validate([
+        /* $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'type' => 'required|string|max:255',
-        ]);
+        ]); */
 
         // Crea la nueva categoría con los datos validados
-        $category = Category::create([
-            'name' => $validatedData['name'],
-            'type' => $validatedData['type'],
-        ]);
+        $category = Category::create($request->validated());
 
         // Devuelve una respuesta JSON exitosa
         return response()->json([
@@ -49,7 +46,7 @@ class CategoryController extends Controller
         //
         $category = Category::find($id);
         if (!$category) {
-            return response()->json(['message' => 'Category no encontrada.'], 404);
+            return response()->json(['message' => 'Categoria no encontrada.'], 404);
         }
         return $category;
     }
@@ -62,14 +59,13 @@ class CategoryController extends Controller
         //
         $category = Category::find($id);
         if (!$category) {
-            return response()->json(['message' => 'Category no encontrada.'], 404);
+            return response()->json(['message' => 'Categoria no encontrada.'], 404);
         }
-        $request->validate([
-            'name' => 'sometimes|required|max:255',
-            'type' => 'nullable',
-        ]);        
-        $category->update($request->all());
-        return response()->json($category, 200); // 200: OK
+        $category->update($request->validated());      
+        return response()->json([
+            'message' => 'Categoria actualizada exitosamente.',
+            'data' => $category
+        ], 200); // 200: OK
     }
     /**
      * Remove the specified resource from storage.

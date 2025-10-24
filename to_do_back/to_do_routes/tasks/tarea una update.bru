@@ -1,20 +1,20 @@
 meta {
-  name: register task
+  name: tarea una update
   type: http
-  seq: 2
+  seq: 4
 }
 
-post {
-  url: http://to_do_back.test/api/tasks
+put {
+  url: http://to_do_back.test/api/tasks/1
   body: json
   auth: inherit
 }
 
 body:json {
   {
-    "name": "Correr222",
+    "name": "Correr22222222",
     "description": "Tengo que salir a correr",
-    "finish_date": "2025-11-15",
+    "finish_date": "2025-11-16",
     "status": 0,
     "user_id": 1,
     "category_id": 1

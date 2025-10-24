@@ -62,13 +62,13 @@ class AuthController extends Controller
         // --- Paso 1: Validación de Datos ---
         // Validamos que el email y la contraseña hayan sido enviados.
         $request->validate([
-            'email' => 'required|email',
+            'user_name' => 'required',
             'password' => 'required',
         ]);
 
         // --- Paso 2: Intentar la Autenticación ---
         // Buscamos al usuario por su email.
-        $user = User::where('email', $request->email)->first();
+        $user = User::where('user_name', $request->user_name)->first();
 
         // Verificamos si el usuario existe Y si la contraseña es correcta.
         // `Hash::check` compara la contraseña en texto plano enviada por el usuario

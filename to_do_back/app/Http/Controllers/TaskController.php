@@ -24,10 +24,15 @@ class TaskController extends Controller
     {
         // 1. La validación ya ocurrió automáticamente gracias a StoreTaskRequest.
         // 2. Podemos acceder a los datos validados de forma segura con $request->validated().
-        $validatedData = $request->validated();
+        /* $validatedData = $request->validated([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+            'finish_date' => 'required|date',
+            'category_id' => 'required|exists:categories,id',            
+        ]); */
 
         // Crea la nueva tarea con los datos ya validados
-        $task = Task::create($validatedData);
+        $task = Task::create($request->validated());
 
         // Devuelve una respuesta JSON exitosa
         return response()->json([
@@ -39,29 +44,41 @@ class TaskController extends Controller
     public function show(Task $task)
     {
         //
+        $task = Task::find($task->id);
+        if (!$task) {
+            return response()->json(['message' => 'Tarea no encontrada.'], 404);
+        }
+        return $task;
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Task $task)
-    {
-        //
-    }
-
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTaskRequest $request, Task $task)
+    public function update(UpdateTaskRequest $request, $id)
     {
         //
-    }
+        $task = Task::find($id);
+        if (!$task) {
+            return response()->json(['message' => 'Tarea no encontrada.'], 404);
+        }
+        $task->update($request->validated());
+        return response()->json([
+            'message' => 'Tarea actualizada exitosamente.',
+            'data' => $task
+        ], 200); // 200: OK
+    }   
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Task $task)
+    public function destroy($id)
     {
-        //
+        $task = Task::find($id);
+        if (!$task) {
+            return response()->json(['message' => 'Tarea no encontrada.'], 404);
+        }
+        $task->destroy($id);
+        return response()->json([
+            'message' => 'Tarea eliminada exitosamente.',
+        ], 200); // 200: OK
     }
 }

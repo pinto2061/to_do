@@ -15,14 +15,14 @@ Route::get('/user', function (Request $request) {
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']); 
 
-/* Route::apiResource('categories', CategoryController::class);
-Route::apiResource('tasks', TaskController::class); */
+Route::apiResource('categories', CategoryController::class);
+Route::apiResource('tasks', TaskController::class);
 
 
 
 // --- Rutas Protegidas ---
 // Todas las rutas dentro de este grupo requerirán un token de Sanctum válido.
-Route::middleware('auth:sanctum')->group(function () {
+/* Route::middleware('auth:sanctum')->group(function () {
 
     // Ruta para obtener los datos del usuario actualmente autenticado
     Route::get('/user', function (Request $request) {
@@ -39,4 +39,4 @@ Route::middleware('auth:sanctum')->group(function () {
     // por ejemplo, una ruta para hacer logout:
     // Route::post('/logout', [AuthController::class, 'logout']);
 
-});
+}); */

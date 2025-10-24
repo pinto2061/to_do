@@ -15,6 +15,6 @@ class Category extends Model
     ];
 
     public function tasks(){
-        return $this->hasMany(Tasks::class, 'id');
+        return $this->hasMany(Task::class, 'id');
     }
 }
